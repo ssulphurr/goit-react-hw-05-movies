@@ -6,6 +6,7 @@ const Nav = styled.div`
   gap: 20px;
   padding: 12px 20px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 4px;
+  margin-bottom: 12px;
 `;
 const StyledLink = styled(NavLink)`
   color: #001219;
