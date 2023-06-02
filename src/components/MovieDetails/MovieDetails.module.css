@@ -1,0 +1,19 @@
+p {
+  margin: 0;
+}
+
+.movie_wrapper {
+  display: flex;
+  gap: 12px;
+  padding: 4px 8px;
+}
+
+.movie_img {
+  height: 100%;
+}
+
+.movie_info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
