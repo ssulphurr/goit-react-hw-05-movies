@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef, Suspense } from 'react';
 import { useParams, Link, useLocation, Outlet } from 'react-router-dom';
 import css from './MovieDetails.module.css';
+import defaultImg from 'components/defaultImg';
 
 export default function MovieDetails() {
   const { movieId } = useParams();
@@ -35,8 +36,13 @@ export default function MovieDetails() {
       <br />
       <div className={css.movie_wrapper}>
         <img
+          width={300}
           className={css.movie_img}
-          src={`https://image.tmdb.org/t/p/w300${poster_path}`}
+          src={
+            poster_path
+              ? `https://image.tmdb.org/t/p/w300${poster_path}`
+              : defaultImg
+          }
           alt={title}
         />
         <div className={css.movie_info}>

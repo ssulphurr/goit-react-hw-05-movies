@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import css from './Cast.module.css';
+import defaultImg from 'components/defaultImg';
 
 export default function Cast() {
   const { movieId } = useParams();
@@ -31,7 +32,11 @@ export default function Cast() {
                 <div className={css.cast_member}>
                   <img
                     width={80}
-                    src={`https://image.tmdb.org/t/p/w200${profile_path}`}
+                    src={
+                      profile_path
+                        ? `https://image.tmdb.org/t/p/w200${profile_path}`
+                        : defaultImg
+                    }
                     alt={name}
                   />
                   {name}
