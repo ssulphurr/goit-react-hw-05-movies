@@ -16,6 +16,9 @@ const StyledLink = styled(NavLink)`
   &.active {
     color: #ef476f;
   }
+  :hover {
+    text-decoration: underline;
+  }
 `;
 
 export default function SharedLayout() {
