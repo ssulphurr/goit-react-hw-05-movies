@@ -20,7 +20,7 @@ export default function Reviews() {
     };
 
     fetchData();
-  }, []);
+  }, [movieId]);
 
   return (
     <>

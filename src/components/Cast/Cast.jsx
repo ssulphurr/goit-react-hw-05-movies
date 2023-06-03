@@ -20,7 +20,7 @@ export default function Cast() {
     };
 
     fetchData();
-  }, []);
+  }, [movieId]);
 
   return (
     <>
