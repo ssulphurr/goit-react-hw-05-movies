@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
-import { useSearchParams, Link, useLocation } from 'react-router-dom';
+import { useSearchParams, useLocation } from 'react-router-dom';
 import SearchForm from 'components/SearchForm';
+import MoviesList from '../components/MoviesList';
 
 export default function Movies() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -39,27 +40,12 @@ export default function Movies() {
 
   return (
     <>
-      {/* <form onSubmit={handleSubmit}>
-        <input type="text" name="query" placeholder="Movie title..." />
-        <button type="submit">Search</button>
-      </form> */}
-
       <SearchForm onSubmit={handleSubmit} />
 
       {query && movies.length === 0 && (
         <div>We have 0 films titled "{query}"</div>
       )}
-      {query && (
-        <ul>
-          {movies.map(movie => (
-            <li key={movie.id}>
-              <Link to={`${movie.id}`} state={{ from: location }}>
-                {movie.title}
-              </Link>
-            </li>
-          ))}
-        </ul>
-      )}
+      {query && <MoviesList movies={movies} location={location} />}
     </>
   );
 }

@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
+import MoviesList from '../components/MoviesList';
 
 export default function Home() {
   const [trending, setTrending] = useState([]);
@@ -24,17 +25,7 @@ export default function Home() {
   return (
     <div>
       <h1>Trending today</h1>
-      <ul>
-        {trending.map(trend => {
-          return (
-            <li key={trend.id}>
-              <Link to={`movies/${trend.id}`} state={{ from: location }}>
-                {trend.title}
-              </Link>
-            </li>
-          );
-        })}
-      </ul>
+      <MoviesList movies={trending} location={location} />
     </div>
   );
 }
