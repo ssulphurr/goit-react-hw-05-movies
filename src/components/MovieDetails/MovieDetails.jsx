@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useParams, Link, useLocation } from 'react-router-dom';
+import { useParams, Link, useLocation, Outlet } from 'react-router-dom';
 import css from './MovieDetails.module.css';
 
 export default function MovieDetails() {
@@ -30,7 +30,7 @@ export default function MovieDetails() {
       : [];
 
   return (
-    <div>
+    <>
       <Link to={backLinkHref}>Go Back</Link>
       <br />
       <div className={css.movie_wrapper}>
@@ -48,6 +48,18 @@ export default function MovieDetails() {
           <p>{genres}</p>
         </div>
       </div>
-    </div>
+      <hr />
+      <p>Adittional inforemation</p>
+      <ul>
+        <li>
+          <Link to="cast">Cast</Link>
+        </li>
+        <li>
+          <Link to="reviews">Reviews</Link>
+        </li>
+      </ul>
+      <hr />
+      <Outlet />
+    </>
   );
 }
