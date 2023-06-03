@@ -37,6 +37,7 @@ export default function MovieDetails() {
         <img
           className={css.movie_img}
           src={`https://image.tmdb.org/t/p/w300${poster_path}`}
+          alt={title}
         />
         <div className={css.movie_info}>
           <h2>{title}</h2>

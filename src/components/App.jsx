@@ -18,6 +18,12 @@ export function App() {
             <Route path="reviews" element={<Reviews />}></Route>
           </Route>
         </Route>
+        <Route
+          path="/goit-react-hw-05-movies"
+          element={
+            <div>Видаліть "goit-react-hw-05-movies" з пошукової стрічки</div>
+          }
+        />
         <Route path="*" element={<div>Not found</div>} />
       </Routes>
     </div>
