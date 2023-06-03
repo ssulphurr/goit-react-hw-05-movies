@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense, useRef } from 'react';
 import { useParams, Link, useLocation, Outlet } from 'react-router-dom';
 import css from './MovieDetails.module.css';
 
@@ -6,7 +6,7 @@ export default function MovieDetails() {
   const { movieId } = useParams();
   const [movieData, setMovieData] = useState([]);
   const location = useLocation();
-  const backLinkHref = location.state?.from ?? '/';
+  const backLinkHrefRef = useRef(location.state?.from ?? '/');
 
   useEffect(() => {
     const fetchData = async () => {
@@ -31,7 +31,7 @@ export default function MovieDetails() {
 
   return (
     <>
-      <Link to={backLinkHref}>Go Back</Link>
+      <Link to={backLinkHrefRef.current}>Go Back</Link>
       <br />
       <div className={css.movie_wrapper}>
         <img

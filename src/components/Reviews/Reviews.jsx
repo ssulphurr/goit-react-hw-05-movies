@@ -21,14 +21,16 @@ export default function Reviews() {
   return (
     <>
       <ul>
-        {reviews.map(({ id, author, content }) => (
-          <li key={id}>
-            <div>
-              <h3>Author: {author}</h3>
-              <p>{content}</p>
-            </div>
-          </li>
-        ))}
+        {reviews.length > 0
+          ? reviews.map(({ id, author, content }) => (
+              <li key={id}>
+                <div>
+                  <h3>Author: {author}</h3>
+                  <p>{content}</p>
+                </div>
+              </li>
+            ))
+          : "We couldn't find reviews for this film"}
       </ul>
     </>
   );
