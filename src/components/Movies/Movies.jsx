@@ -41,17 +41,15 @@ export default function Movies() {
         <button type="submit">Search</button>
       </form>
 
-      {query !== null ? (
-        <ul>
-          {movies.map(movie => (
-            <li key={movie.id}>
-              <Link to={`${movie.id}`} state={{ from: location }}>
-                {movie.title}
-              </Link>
-            </li>
-          ))}
-        </ul>
-      ) : null}
+      <ul>
+        {movies.map(movie => (
+          <li key={movie.id}>
+            <Link to={`${movie.id}`} state={{ from: location }}>
+              {movie.title}
+            </Link>
+          </li>
+        ))}
+      </ul>
     </>
   );
 }

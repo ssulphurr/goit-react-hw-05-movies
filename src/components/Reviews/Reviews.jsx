@@ -11,8 +11,12 @@ export default function Reviews() {
         `https://api.themoviedb.org/3/movie/${movieId}/reviews?api_key=453b881a671dd013b145c543ca73b9df`
       );
 
-      const data = await response.json();
-      setReviews(data.results);
+      try {
+        const data = await response.json();
+        setReviews(data.results);
+      } catch (error) {
+        console.log(error.message);
+      }
     };
 
     fetchData();
