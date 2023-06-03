@@ -1,11 +1,12 @@
 import { lazy } from 'react';
 import { Routes, Route } from 'react-router-dom';
-const SharedLayout = lazy(() => import('./SharedLayout/SharedLayout'));
+import SharedLayout from './SharedLayout/SharedLayout';
 const Home = lazy(() => import('./Home/Home'));
 const Movies = lazy(() => import('./Movies/Movies'));
 const MovieDetails = lazy(() => import('./MovieDetails/MovieDetails'));
 const Cast = lazy(() => import('./Cast/Cast'));
 const Reviews = lazy(() => import('./Reviews/Reviews'));
+const NotFound = lazy(() => import('pages/NotFound'));
 
 export function App() {
   return (
@@ -19,13 +20,7 @@ export function App() {
             <Route path="reviews" element={<Reviews />}></Route>
           </Route>
         </Route>
-        <Route
-          path="/goit-react-hw-05-movies"
-          element={
-            <div>Видаліть "goit-react-hw-05-movies" з пошукової стрічки</div>
-          }
-        />
-        <Route path="*" element={<div>Not found</div>} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
   );
