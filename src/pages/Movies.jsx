@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useSearchParams, Link, useLocation } from 'react-router-dom';
+import SearchForm from 'components/SearchForm';
 
 export default function Movies() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -38,10 +39,12 @@ export default function Movies() {
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
+      {/* <form onSubmit={handleSubmit}>
         <input type="text" name="query" placeholder="Movie title..." />
         <button type="submit">Search</button>
-      </form>
+      </form> */}
+
+      <SearchForm onSubmit={handleSubmit} />
 
       {query && movies.length === 0 && (
         <div>We have 0 films titled "{query}"</div>
