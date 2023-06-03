@@ -30,26 +30,33 @@ export default function Movies() {
 
   const handleSubmit = e => {
     e.preventDefault();
-    setSearchParams({ query: e.target.elements.query.value });
-    e.target.elements.query.value = '';
+    const input = e.target.elements.query;
+    const nextParams = input.value.trim() !== '' ? { query: input.value } : {};
+    setSearchParams(nextParams);
+    input.value = '';
   };
 
   return (
     <>
       <form onSubmit={handleSubmit}>
-        <input type="text" name="query" />
+        <input type="text" name="query" placeholder="Movie title..." />
         <button type="submit">Search</button>
       </form>
 
-      <ul>
-        {movies.map(movie => (
-          <li key={movie.id}>
-            <Link to={`${movie.id}`} state={{ from: location }}>
-              {movie.title}
-            </Link>
-          </li>
-        ))}
-      </ul>
+      {query && movies.length === 0 && (
+        <div>We have 0 films titled "{query}"</div>
+      )}
+      {query && (
+        <ul>
+          {movies.map(movie => (
+            <li key={movie.id}>
+              <Link to={`${movie.id}`} state={{ from: location }}>
+                {movie.title}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      )}
     </>
   );
 }
