@@ -1,7 +1,9 @@
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
-export default function MoviesList({ movies, location }) {
+export default function MoviesList({ movies }) {
+  const location = useLocation();
+
   return (
     <ul>
       {movies.map(movie => {
