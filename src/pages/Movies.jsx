@@ -1,28 +1,32 @@
 import { useEffect, useState } from 'react';
-import { useSearchParams, useLocation } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import SearchForm from 'components/SearchForm';
 import MoviesList from '../components/MoviesList';
 import { fetchMovies } from 'services/fetchData';
+import Loader from 'components/Loader/Loader';
 
 export default function Movies() {
   const [searchParams, setSearchParams] = useSearchParams();
   const query = searchParams.get('query');
 
   const [movies, setMovies] = useState([]);
-
-  const location = useLocation();
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     if (!query) {
       return;
     }
     const fetchData = async () => {
+      setIsLoading(true);
+
       const response = await fetchMovies(query);
       try {
         const data = await response.json();
         setMovies(data.results);
       } catch (error) {
         console.log(error);
+      } finally {
+        setIsLoading(false);
       }
     };
 
@@ -41,10 +45,13 @@ export default function Movies() {
     <>
       <SearchForm onSubmit={handleSubmit} />
 
-      {query && movies.length === 0 && (
+      {isLoading && <Loader />}
+
+      {query && <MoviesList movies={movies} />}
+
+      {query && movies.length === 0 && !isLoading && (
         <div>We have 0 films titled "{query}"</div>
       )}
-      {query && <MoviesList movies={movies} location={location} />}
     </>
   );
 }

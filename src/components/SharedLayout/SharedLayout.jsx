@@ -1,6 +1,7 @@
 import { NavLink, Outlet } from 'react-router-dom';
 import styled from 'styled-components';
 import { Suspense } from 'react';
+import Loader from 'components/Loader/Loader';
 
 const Nav = styled.div`
   display: flex;
@@ -28,7 +29,7 @@ export default function SharedLayout() {
         <StyledLink to="/">Home</StyledLink>
         <StyledLink to="/movies">Movies</StyledLink>
       </Nav>
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<Loader />}>
         <Outlet />
       </Suspense>
     </div>

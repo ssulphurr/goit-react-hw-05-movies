@@ -1,20 +1,24 @@
 import { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
 import MoviesList from '../components/MoviesList';
 import { fetchTrending } from 'services/fetchData';
+import Loader from 'components/Loader/Loader';
 
 export default function Home() {
   const [trending, setTrending] = useState([]);
-  const location = useLocation();
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
+      setIsLoading(true);
+
       const response = await fetchTrending();
       try {
         const movies = await response.json();
         setTrending(movies.results);
       } catch (error) {
         console.log(error);
+      } finally {
+        setIsLoading(false);
       }
     };
 
@@ -24,7 +28,7 @@ export default function Home() {
   return (
     <div>
       <h1>Trending today</h1>
-      <MoviesList movies={trending} />
+      {isLoading ? <Loader /> : <MoviesList movies={trending} />}
     </div>
   );
 }
