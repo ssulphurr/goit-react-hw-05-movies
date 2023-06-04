@@ -51,7 +51,7 @@ export default function Movies() {
       {query && <MoviesList movies={movies} />}
 
       {query && movies.length === 0 && !isLoading && (
-        <div>We have 0 films titled "{query}"</div>
+        <h3>We have 0 films titled "{query}"</h3>
       )}
 
       {error && <h3>Oops, something went wrong: {error.message}</h3>}

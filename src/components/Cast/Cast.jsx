@@ -53,7 +53,7 @@ export default function Cast() {
           ))}
       </ul>
       {!isLoading && cast.length === 0 && (
-        <p>We have no info about cast of this film</p>
+        <h3>We have no info about cast of this film</h3>
       )}
 
       {error && <h3>Oops, something went wrong: {error.message}</h3>}

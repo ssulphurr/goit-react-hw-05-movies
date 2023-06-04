@@ -43,7 +43,7 @@ export default function Reviews() {
           ))}
       </ul>
       {!isLoading && reviews.length === 0 && (
-        <p>We couldn't find reviews for this film</p>
+        <h3>We couldn't find reviews for this film</h3>
       )}
 
       {error && <h3>Oops, something went wrong: {error.message}</h3>}
