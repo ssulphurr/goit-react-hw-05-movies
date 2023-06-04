@@ -6,6 +6,7 @@ import Loader from 'components/Loader/Loader';
 export default function Home() {
   const [trending, setTrending] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -16,7 +17,7 @@ export default function Home() {
         const movies = await response.json();
         setTrending(movies.results);
       } catch (error) {
-        console.log(error);
+        setError(error);
       } finally {
         setIsLoading(false);
       }
@@ -26,9 +27,11 @@ export default function Home() {
   }, []);
 
   return (
-    <div>
+    <>
       <h1>Trending today</h1>
       {isLoading ? <Loader /> : <MoviesList movies={trending} />}
-    </div>
+
+      {error && <h3>Oops, something went wrong: {error.message}</h3>}
+    </>
   );
 }

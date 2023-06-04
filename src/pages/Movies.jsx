@@ -11,6 +11,7 @@ export default function Movies() {
 
   const [movies, setMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     if (!query) {
@@ -24,7 +25,7 @@ export default function Movies() {
         const data = await response.json();
         setMovies(data.results);
       } catch (error) {
-        console.log(error);
+        setError(error);
       } finally {
         setIsLoading(false);
       }
@@ -52,6 +53,8 @@ export default function Movies() {
       {query && movies.length === 0 && !isLoading && (
         <div>We have 0 films titled "{query}"</div>
       )}
+
+      {error && <h3>Oops, something went wrong: {error.message}</h3>}
     </>
   );
 }

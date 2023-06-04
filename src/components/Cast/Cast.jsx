@@ -9,6 +9,7 @@ export default function Cast() {
   const { movieId } = useParams();
   const [cast, setCast] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -18,7 +19,7 @@ export default function Cast() {
         const data = await response.json();
         setCast(data.cast);
       } catch (error) {
-        console.loh(error.message);
+        setError(error);
       } finally {
         setIsLoading(false);
       }
@@ -51,9 +52,11 @@ export default function Cast() {
             </li>
           ))}
       </ul>
-      {!isLoading &&
-        cast.length === 0 &&
-        'We have no info about cast of this film'}
+      {!isLoading && cast.length === 0 && (
+        <p>We have no info about cast of this film</p>
+      )}
+
+      {error && <h3>Oops, something went wrong: {error.message}</h3>}
     </>
   );
 }

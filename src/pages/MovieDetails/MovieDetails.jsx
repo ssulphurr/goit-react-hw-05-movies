@@ -9,6 +9,7 @@ export default function MovieDetails() {
   const { movieId } = useParams();
   const [movieData, setMovieData] = useState({});
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
   const location = useLocation();
   const backLinkHrefRef = useRef(location.state?.from ?? '/');
 
@@ -22,6 +23,7 @@ export default function MovieDetails() {
         const data = await response.json();
         setMovieData(data);
       } catch (error) {
+        setError(error);
       } finally {
         setIsLoading(false);
       }
@@ -66,6 +68,8 @@ export default function MovieDetails() {
           </div>
         </>
       )}
+
+      {error && <h3>Oops, something went wrong: {error.message}</h3>}
 
       <hr />
       <p>Additional information</p>

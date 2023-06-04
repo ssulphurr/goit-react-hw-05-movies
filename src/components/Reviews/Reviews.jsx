@@ -7,6 +7,7 @@ export default function Reviews() {
   const { movieId } = useParams();
   const [reviews, setReviews] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -17,7 +18,7 @@ export default function Reviews() {
         const data = await response.json();
         setReviews(data.results);
       } catch (error) {
-        console.log(error.message);
+        setError(error);
       } finally {
         setIsLoading(false);
       }
@@ -41,9 +42,11 @@ export default function Reviews() {
             </li>
           ))}
       </ul>
-      {!isLoading &&
-        reviews.length === 0 &&
-        "We couldn't find reviews for this film"}
+      {!isLoading && reviews.length === 0 && (
+        <p>We couldn't find reviews for this film</p>
+      )}
+
+      {error && <h3>Oops, something went wrong: {error.message}</h3>}
     </>
   );
 }
