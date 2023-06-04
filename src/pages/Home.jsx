@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import MoviesList from '../components/MoviesList';
+import { fetchTrending } from 'services/fetchData';
 
 export default function Home() {
   const [trending, setTrending] = useState([]);
@@ -8,9 +9,7 @@ export default function Home() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch(
-        'https://api.themoviedb.org/3/trending/movie/week?api_key=453b881a671dd013b145c543ca73b9df'
-      );
+      const response = await fetchTrending();
       try {
         const movies = await response.json();
         setTrending(movies.results);

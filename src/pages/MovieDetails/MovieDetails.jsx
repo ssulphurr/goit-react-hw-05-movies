@@ -2,6 +2,7 @@ import { useState, useEffect, useRef, Suspense } from 'react';
 import { useParams, Link, useLocation, Outlet } from 'react-router-dom';
 import css from './MovieDetails.module.css';
 import defaultImg from 'components/defaultImg';
+import { fetchMovieDetails } from 'services/fetchData';
 
 export default function MovieDetails() {
   const { movieId } = useParams();
@@ -11,9 +12,7 @@ export default function MovieDetails() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch(
-        `https://api.themoviedb.org/3/movie/${movieId}?api_key=453b881a671dd013b145c543ca73b9df`
-      );
+      const response = await fetchMovieDetails(movieId);
 
       try {
         const data = await response.json();
@@ -55,7 +54,7 @@ export default function MovieDetails() {
         </div>
       </div>
       <hr />
-      <p>Adittional inforemation</p>
+      <p>Additional information</p>
       <ul>
         <li>
           <Link to="cast">Cast</Link>

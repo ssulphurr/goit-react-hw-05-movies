@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { fetchReviews } from 'services/fetchData';
 
 export default function Reviews() {
   const { movieId } = useParams();
@@ -7,9 +8,7 @@ export default function Reviews() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch(
-        `https://api.themoviedb.org/3/movie/${movieId}/reviews?api_key=453b881a671dd013b145c543ca73b9df`
-      );
+      const response = await fetchReviews(movieId);
 
       try {
         const data = await response.json();

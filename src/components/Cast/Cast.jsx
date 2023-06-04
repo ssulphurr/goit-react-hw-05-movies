@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import css from './Cast.module.css';
 import defaultImg from 'components/defaultImg';
+import { fetchCast } from 'services/fetchData';
 
 export default function Cast() {
   const { movieId } = useParams();
@@ -9,9 +10,7 @@ export default function Cast() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch(
-        `https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=453b881a671dd013b145c543ca73b9df`
-      );
+      const response = await fetchCast(movieId);
       try {
         const data = await response.json();
         setCast(data.cast);

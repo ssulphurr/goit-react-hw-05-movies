@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useSearchParams, useLocation } from 'react-router-dom';
 import SearchForm from 'components/SearchForm';
 import MoviesList from '../components/MoviesList';
+import { fetchMovies } from 'services/fetchData';
 
 export default function Movies() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -16,9 +17,7 @@ export default function Movies() {
       return;
     }
     const fetchData = async () => {
-      const response = await fetch(
-        `https://api.themoviedb.org/3/search/movie?api_key=453b881a671dd013b145c543ca73b9df&query=${query}`
-      );
+      const response = await fetchMovies(query);
       try {
         const data = await response.json();
         setMovies(data.results);
