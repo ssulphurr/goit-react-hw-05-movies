@@ -9,14 +9,7 @@ export default function MoviesList({ movies }) {
       {movies.map(movie => {
         return (
           <li key={movie.id}>
-            <Link
-              to={
-                location.pathname.includes('movies')
-                  ? `${movie.id}`
-                  : `movies/${movie.id}`
-              }
-              state={{ from: location }}
-            >
+            <Link to={`/movies/${movie.id}`} state={{ from: location }}>
               {movie.title}
             </Link>
           </li>
